@@ -1,44 +1,46 @@
 package jp.ac.uryukyu.ie.e175715;
 import java.util.*;
-import java.util.Vector;
 
 public class Deck {
+    /*
+    *山札を表すクラス
+     */
     Random rnd;
-    int cardNum;
-    int nextItem;
+    private int cardNum;
+    private int nextItem;
     Vector Cards;
-    Vector shuffledCards;
+    private Vector shuffledCards;
 
     public Deck(){
-        Cards = new Vector();
-        shuffledCards = new Vector();
+        Cards = new Vector();       //シャッフルする前のカードを保存
+        shuffledCards = new Vector();   //シャッフル後のカードを保存
         rnd = new Random();
-        cardNum = 52;
-        nextItem = 0;
+        cardNum = 52;               //配る前のカードの枚数
+        nextItem = 0;               //どのカードを配ったか記憶
     }
-    public void resetDeck(){
+    public void resetDeck(){        //山札の初期化
         Heart();
         Spade();
         Club();
         Diamond();
     }
-    int getDeckSize(){
+    int getDeckSize(){              //残っているカードの枚数を数える
         int size = 0;
         size = shuffledCards.size();
         return size;
     }
-    Card getNextCard(){
+    Card getNextCard(){             //次のカードを配る
         Card card = null;
         Object obj = shuffledCards.get(nextItem);
         String str = obj.toString();
         int i = str.indexOf(",");
         String S1 = str.substring(0,1);
-        String S2 = str.substring(i+1, str.length() - 1);
+        String S2 = str.substring(i+1, str.length());
         card = new Card(S1, S2);
         ++nextItem;
         return card;
     }
-    public void shuffleDeck(){
+    public void shuffleDeck(){      //カードのシャッフル
         for(int i=0; i<52; i++){
             shuffledCards.insertElementAt(Cards.get(i), i);
         }
@@ -61,56 +63,28 @@ public class Deck {
             shuffledCards.insertElementAt(temp,b);
         }
     }
-    public void Heart(){
+    private void Heart(){       //ハートスートの生成
         for(int i=1; i<=13; i++) {
             String s = Integer.toString(i);
-            Cards.addElement(s + "　ハート");
+            Cards.addElement(s + "　❤︎");
         }
     }
-    public void Spade(){
+    private void Spade(){       //スペードスートの生成
         for(int i=1; i<=13; i++){
             String s = Integer.toString(i);
-            Cards.addElement(s + " スペード");
+            Cards.addElement(s + " ♠︎");
         }
     }
-    public void Club(){
-        for(int i=1; i<=13; i++){
+    private void Club(){
+        for(int i=1; i<=13; i++){   //クラブスートの生成
             String s = Integer.toString(i);
-            Cards.addElement(s + " クラブ️");
+            Cards.addElement(s + " ♣︎");
         }
     }
-    public void Diamond(){
+    private void Diamond(){     //ダイヤスートの生成
         for(int i=1; i<=13; i++) {
             String s = Integer.toString(i);
-            Cards.addElement(s + "　ダイヤ︎");
+            Cards.addElement(s + "　♦︎");
         }
-    }
-}
-
-class Ace1{
-    public static void main(String args[]){
-        Deck D = new Deck();
-        String[] s = new String[100];
-        int i = 0;
-        D.resetDeck();
-        String str = (String)(Object)D.Cards.get(0);
-        i = str.indexOf(",");
-        String S1 = str.substring(0,1);
-        String S2 = str.substring(i+1, str.length() - 1);
-        System.out.println(S1);
-        System.out.println(S2);
-        String Pi = null;
-        if(S1.equals("1")){
-            Pi = "Ace";
-        }
-        System.out.println(Pi);
-    }
-}
-
-class Ace2{
-    public static void main(String args[]){
-        Card C = new Card("1", "ハート");
-        System.out.println(C.getPicture());
-        System.out.println(C.getSuit());
     }
 }
