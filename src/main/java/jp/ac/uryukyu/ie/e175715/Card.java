@@ -4,14 +4,23 @@ public class Card {
     /*
      *カードの数字,スートの基本設定
      */
-    String Suit;
-    int Value;
-    String picture;
+    private String Suit;
+    private int Value;
+    private String picture;
 
     public Card(String s1,String s2){
         setSuit(s1,s2);
         setValue(s1,s2);
         setPicture(s1,s2);
+    }
+    String getSuit(){
+        return Suit;
+    }
+    int getValue(){
+        return Value;
+    }
+    String getPicture(){
+        return picture;
     }
     public void setSuit(String S1, String S2){
         Suit = S2;
