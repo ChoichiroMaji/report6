@@ -13,27 +13,27 @@ public class Card {
         setValue(s1,s2);
         setPicture(s1,s2);
     }
-    String getSuit(){
+    public String getSuit(){
         return Suit;
     }
-    int getValue(){
+    public int getValue(){
         return Value;
     }
-    String getPicture(){
+    public String getPicture(){
         return picture;
     }
-    public void setSuit(String S1, String S2){
+    private void setSuit(String S1, String S2){
         //スートの基本設定
         Suit = S2;
     }
-    public void setValue(String S1, String S2){
+    private void setValue(String S1, String S2){
         //数値の基本設定
         Value = Integer.parseInt(S1); //文字列を数値に変換
         if(Value > 10){
             Value = 10;
         }
     }
-    public void setPicture(String S1, String S2){
+    private void setPicture(String S1, String S2){
         /*
          *カードの名称変更
          * 1:Ace

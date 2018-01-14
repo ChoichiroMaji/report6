@@ -11,6 +11,7 @@ public class Deck {
     Vector Cards;
     private Vector shuffledCards;
 
+
     public Deck(){
         Cards = new Vector();       //シャッフルする前のカードを保存
         shuffledCards = new Vector();   //シャッフル後のカードを保存
