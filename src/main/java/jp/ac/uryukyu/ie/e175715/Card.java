@@ -23,15 +23,24 @@ public class Card {
         return picture;
     }
     public void setSuit(String S1, String S2){
+        //スートの基本設定
         Suit = S2;
     }
     public void setValue(String S1, String S2){
-        Value = Integer.parseInt(S1);
+        //数値の基本設定
+        Value = Integer.parseInt(S1); //文字列を数値に変換
         if(Value > 10){
             Value = 10;
         }
     }
     public void setPicture(String S1, String S2){
+        /*
+         *カードの名称変更
+         * 1:Ace
+         * 11:Jack
+         * 12:Queen
+         * 13:King
+         */
         picture = S1;
         if(picture.equals("1")){
             picture = "Ace";
