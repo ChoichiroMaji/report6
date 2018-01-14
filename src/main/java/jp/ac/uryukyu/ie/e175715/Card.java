@@ -29,9 +29,6 @@ public class Card {
     private void setValue(String S1, String S2){
         //数値の基本設定
         Value = Integer.parseInt(S1); //文字列を数値に変換
-        if(Value > 10){
-            Value = 10;
-        }
     }
     private void setPicture(String S1, String S2){
         /*

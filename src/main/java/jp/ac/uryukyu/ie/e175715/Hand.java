@@ -42,7 +42,7 @@ public class Hand {
     }
     boolean over(){
         //手札の合計が21を上回ってしまった場合
-        if(under(22)){
+        if(!under(22)){
             return true;
         }else{
             return false;

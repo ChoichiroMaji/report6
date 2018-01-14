@@ -38,7 +38,7 @@ public class Player {
         hand.showHand();
     }
     public void showPicture(){
-        hand.showPicture();
+        hand.showHand();
     }
     int getValueOfHand(){
         int Value = 0;

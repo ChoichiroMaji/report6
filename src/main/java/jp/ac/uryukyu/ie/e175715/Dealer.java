@@ -1,89 +1,92 @@
 package jp.ac.uryukyu.ie.e175715;
 import java.util.Scanner;
 
-public class Dealer {
+public class Dealer{
     /*
-     *ディーラー（NPC）の操作設定と
-     * 勝敗の設定
+     *ディーラー（コンピュータ）と
+     * 手札調整,勝敗の設定
      */
-    int limit = 21;
-    Player player;
+    int limit =21;
+    Player you;
     Deck deck;
     Hand dealerHand;
-    int game;
     Scanner sc;
-    public Dealer(){
+    int game;
+    Dealer(){
         deck = new Deck();
     }
-    Card getCard() {
-        //カードの配布
+    Card getCard(){
         Card newCard = null;
-        newCard = deck.getNextCard();
+        newCard = deck.getNextCard();       //カードの配布
         return newCard;
     }
-    public void startNewGame(){
-        //ゲームの基本画面
+    void startNewGame(){
         do{
-            player = new Player();
+            you = new Player();
             dealerHand = new Hand();
             System.out.println("ゲームを開始しますか？\n1:はい　2:いいえ");
             sc = new Scanner(System.in);
             game = sc.nextInt();
-            if(game == 1){          //1と入力すればゲーム（リ）スタート
+            if(game == 1){      //1が入力されるとゲームスタート
                 deck.resetDeck();
                 deck.shuffleDeck();
                 drawDealer();
                 drawPlayer();
-                while(player.under(22) && player.moreCards()){
-                    player.getCard(getCard());
-                    System.out.println("あなたの手札...");
-                    player.showPicture();
+                while(you.under(22) && you.moreCards()){
+                    //ディーラーの手札合計が17を下回る時に引き直す
+                    you.getCard(getCard());
+                    System.out.println("player Hand:-------");
+                    you.showPicture();  //プレイヤーの手札表示
                 }
                 while(dealerHand.mustHit()){
-                    //ディーラーの手札合計が17を下回る場合,ドロー
                     dealerHand.addToHand(getCard());
                 }
-                System.out.println("ディーラーの手札...");
-                dealerHand.addToHand(getCard());
-                System.out.println("----------------");
-                System.out.println("あなたの合計：" + player.getValueOfHand());
-                System.out.println("ディーラーの合計：" + dealerHand.getValue());
-                System.out.println("----------------");
+                System.out.println("dealer Hand:-------");
+                dealerHand.showHand();  //ディーラーの手札表示
+                System.out.println("------------");
+                System.out.println("player Value:"+you.getValueOfHand());
+                System.out.println("dealer Value:"+dealerHand.getValue());
+                System.out.println("------------");
                 showResult();
             }
-        }while(game != 0);          //０と入力すればゲーム終了
+        }while(game == 0);      //0が入力されると終了
     }
+
     public void showResult(){
-        //勝敗の設定
-        if(player.over() && dealerHand.over()){
-            System.out.println("引き分けです");
-        }else if(dealerHand.over()){
-            System.out.println("あなたの勝ちです！");
-        }else if(player.over()){
-            System.out.println("あなたの負けです、、、");
-        }else if(player.bestScore() > dealerHand.bestScore()){
-            System.out.println("あなたの勝ちです！");
-        }else if(player.bestScore() < dealerHand.bestScore()){
-            System.out.println("あなたの負けです、、、");
-        }else{
-            System.out.println("引き分けです");
+        if(you.over() && dealerHand.over()){
+            System.out.println("tie");
         }
+        else if(you.over()){
+            System.out.println("Prayer Lose...");
+        }
+        else if(dealerHand.over()){
+            System.out.println("Player Win!");
+        }
+        else if(you.bestScore() > dealerHand.bestScore()){
+            System.out.println("Player Win!");
+        }
+        else if(you.bestScore() < dealerHand.bestScore()){
+            System.out.println("Player Lose...");
+        }
+        else System.out.println("tie");
     }
+
     public void drawDealer(){
         //追加ドロー（ディーラー）
         dealerHand = new Hand();
-        deck.resetDeck();       //山札リセット
-        deck.shuffleDeck();     //山札シャッフル
+        deck.resetDeck();
+        deck.shuffleDeck();
         dealerHand.addToHand(getCard());
-        System.out.println("ディーラーの手札...");
+        dealerHand.addToHand(getCard());
+        System.out.println("dealer Hand:-------");
         dealerHand.showHand();
     }
     public void drawPlayer(){
         //追加ドロー（プレイヤー）
-        player = new Player();
-        player.getCard(getCard());      //山札リセット
-        player.getCard(getCard());      //山札シャッフル
-        System.out.println("あなたの手札...");
-        player.showHand();
+        you = new Player();
+        you.getCard(getCard());
+        you.getCard(getCard());
+        System.out.println("player Hand:-------");
+        you.showHand();
     }
 }
