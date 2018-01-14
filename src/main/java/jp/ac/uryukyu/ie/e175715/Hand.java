@@ -1,6 +1,9 @@
 package jp.ac.uryukyu.ie.e175715;
 import java.util.*;
 public class Hand {
+    /*
+     *手札の設定
+     */
     private int Value;
     private Vector hand;
 
@@ -14,21 +17,18 @@ public class Hand {
         return Value;
     }
     public void addToHand(Card card){
+        //ドロー
         hand.addElement(card);
     }
     public void showHand(){
-        for(int i=0; i<hand.size(); i++){
-            Card card = (Card)(Object)hand.get(i);
-            System.out.println(card.getPicture() + " " + card.getSuit());
-        }
-    }
-    public void showPicture(){
+        //手札を出力
         for(int i=0; i<hand.size(); i++){
             Card card = (Card)(Object)hand.get(i);
             System.out.println(card.getPicture() + " " + card.getSuit());
         }
     }
     boolean under(int limit){
+        //手札の合計が21を下回る場合
         int point = 0;
         for(int i=0; i<hand.size(); i++){
             Card card = (Card)(Object)hand.get(i);
@@ -41,6 +41,7 @@ public class Hand {
         }
     }
     boolean over(){
+        //手札の合計が21を上回ってしまった場合
         if(under(22)){
             return true;
         }else{
@@ -48,6 +49,7 @@ public class Hand {
         }
     }
     int bestScore(){
+        //今現在の手札の合計
         int point = 0;
         boolean haveAce = false;
         for(int i=0; i<hand.size(); i++) {
