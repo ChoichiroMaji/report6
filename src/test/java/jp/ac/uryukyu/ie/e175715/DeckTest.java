@@ -12,9 +12,7 @@ public class DeckTest {
         String[]  s = new String[100];
         int i = 0;
         D.resetDeck();
-        //	D.showOriginalDeck();
         String str = (String)(Object)D.Cards.get(0);
-        //	System.out.println(str);
         i = str.indexOf(",");
         String S1 = str.substring(0,i);
         String S2 = str.substring(i+1,str.length());
