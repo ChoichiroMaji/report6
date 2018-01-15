@@ -35,17 +35,17 @@ public class Dealer{
                 while(you.under(22) && you.moreCards()){
                     //ディーラーの手札合計が17を下回る時に引き直す
                     you.getCard(getCard());
-                    System.out.println("player Hand:-------");
+                    System.out.println("あなたの手札.....");
                     you.showPicture();  //プレイヤーの手札表示
                 }
                 while(dealerHand.mustHit()){
                     dealerHand.addToHand(getCard());
                 }
-                System.out.println("dealer Hand:-------");
+                System.out.println("ディーラーの手札.....");
                 dealerHand.showHand();  //ディーラーの手札表示
                 System.out.println("------------");
-                System.out.println("player Value:"+you.getValueOfHand());
-                System.out.println("dealer Value:"+dealerHand.getValue());
+                System.out.println("あなたの手札の合計:"+you.getValueOfHand());
+                System.out.println("ディーラーの手札の合計:"+dealerHand.getValue());
                 System.out.println("------------");
                 showResult();
             }
@@ -54,21 +54,21 @@ public class Dealer{
 
     public void showResult(){
         if(you.over() && dealerHand.over()){
-            System.out.println("tie");
+            System.out.println("引き分け");
         }
         else if(you.over()){
-            System.out.println("Prayer Lose...");
+            System.out.println("あなたの負けです...");
         }
         else if(dealerHand.over()){
-            System.out.println("Player Win!");
+            System.out.println("あなたの勝ちです!");
         }
         else if(you.bestScore() > dealerHand.bestScore()){
-            System.out.println("Player Win!");
+            System.out.println("あなたの勝ちです!");
         }
         else if(you.bestScore() < dealerHand.bestScore()){
-            System.out.println("Player Lose...");
+            System.out.println("あなたの負けです...");
         }
-        else System.out.println("tie");
+        else System.out.println("引き分け");
     }
 
     public void drawDealer(){
@@ -78,7 +78,7 @@ public class Dealer{
         deck.shuffleDeck();
         dealerHand.addToHand(getCard());
         dealerHand.addToHand(getCard());
-        System.out.println("dealer Hand:-------");
+        System.out.println("ディーラーの手札.....");
         dealerHand.showHand();
     }
     public void drawPlayer(){
@@ -86,7 +86,7 @@ public class Dealer{
         you = new Player();
         you.getCard(getCard());
         you.getCard(getCard());
-        System.out.println("player Hand:-------");
+        System.out.println("あなたの手札.....");
         you.showHand();
     }
 }

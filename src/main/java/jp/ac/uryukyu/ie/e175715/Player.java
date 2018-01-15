@@ -17,16 +17,16 @@ public class Player {
     boolean moreCards() {           //さらにカードを引くかどうかの入力
         char ch = ' ';
         do {
-            System.out.println("Hit or Stay: ");
+            System.out.println("ヒット:h ステイ:s");
             try {
                 String myString = MyReader.readLine();
                 ch = myString.charAt(0);
             } catch (IOException e) {
             } catch (StringIndexOutOfBoundsException e) {
             }
-            if (ch == 'H' || ch == 'h') {
+            if (ch == 'h') {
                 return true;
-            } else if (ch == 'S' || ch == 's') {
+            } else if (ch == 's') {
                 return false;
             }
         } while (true);
